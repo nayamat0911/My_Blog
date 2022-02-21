@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title_block %}
+    {{title}}
+{% endblock title_block %}
+
+
+
+{% block content_block %}
+
+<div class="profile" style="width: 100%; height: 100vh;">
+
+    <h2 style="text-align: center;"> Your Profile</h2><hr>
+    {% if user.user_profile %}
+    <img src="/media/{{user.user_profile.profile_pic}}" alt="" width="180px " class="rounded-circle"  style="border: 2px solid #ccc; position: relative;" height="180px">
+    
+    <a href="{% url 'login_app:change_pic' %}" class="btn bg-light" style="position: absolute; ">Change Picture</a>
+    {% else %}
+    <img src="/media/defult.png" alt="" class="rounded-circle" width="180px " style="border: 2px solid #ccc;" height="180px" ><br><br>
+    <a href="{% url 'login_app:add_pro_pic' %}" class="btn btn-secondary">Change profile pic</a><br>
+    {% endif %}
+    <br><br>
+    <p> Username: {{user.username}}</p>
+    <p> Name: {{user.first_name}} {{user.Last_name}}</p>
+    <p> Email Address: {{user.email}}</p>
+
+    <br><br>
+    <div class="edit_option">
+        <span>Change Your Profile info <a href="{% url 'login_app:User_change' %}"><b>Edit Now!</b> </a> or <small> <a href="{% url 'login_app:pass_change' %}"> Change password</a> </small></span>
+        <br><br>
+
+    </div>
+</div>
+{% endblock content_block %}

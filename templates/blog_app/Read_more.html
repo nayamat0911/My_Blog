@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title_block %}
+    {{title}}
+{% endblock title_block %}
+
+
+
+{% block content_block %}
+    <div class="login_page" style="width: 100%; height:100vh;">
+
+
+    <h2 style="text-align: center;">If You want to read full articale you should <a href="{% url 'login_app:User_login' %}">Login</a> or <a href="{% url 'login_app:SignUp' %}">Sign Up</a> first otherwise it's boyend fretures</h2><hr>
+        <div class="read_more text-center">
+            <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus nemo vel rem alias, itaque magni explicabo eum dolores? Cupiditate ratione excepturi maiores fuga voluptas, obcaecati labore ea quidem quasi deserunt quos fugit, et perspiciatis ipsum doloremque quis consectetur eius eum itaque eaque sequi repellendus quam beatae. Reiciendis animi suscipit quasi?</small>
+            <br><br>
+            <p>Login your Account!</p>
+            <a href="{% url 'login_app:User_login' %}" class="btn btn-success px-3 py-2">Login</a><br><br><br>
+            <p>Haven't an account? </p>
+            <a href="{% url 'login_app:SignUp' %}" class="btn btn-success px-3 py-2">Sign Up</a>
+            
+            
+        </div>
+
+           
+
+            
+      
+    </div>
+  
+{% endblock content_block %}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <!---fontaowsme icon-->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" >
+
+    <title>
+        {% block title_block %}
+            Blog 
+        {% endblock title_block %}
+    </title>
+    
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-sm bg-info navbar-dark" style="color: brown; font-size: 20px; padding: 7px;">
+        <ul class="navbar-nav">
+            <li class="nav-item active pl-5">
+                <a href="{% url 'blog_app:HomePage' %}" class="nav-link ">Home</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item pl-3 pr-3">
+                <a href="{% url 'blog_app:blog_list' %}" class="nav-link ">All Post</a>
+            </li>
+            <li class="nav-item pl-3 pr-3">
+                <a href="{% url 'blog_app:my_blog' %}" class="nav-link"> My Blog</a>
+            </li>
+            {% else %}
+            <li class="nav-item pl-3 pr-3">
+                <a href="{% url 'blog_app:blog_list' %}" class="nav-link ">All Post</a>
+            </li>
+            {% endif %}
+
+            {% if request.user.is_authenticated %}
+            <div class="nav-item dropdown">
+                <a href="" class="nav-link dropdown-toggle mt-3 pl-3" id="navbardrop" data-toggle="dropdown">{{user.username}}
+                </a>
+                <div class="dropdown-menu">
+                    <a href="{% url 'blog_app:create_blog' %}" class="dropdown-item"> Write Blog</a>
+                    <!---my blog option-->
+                    <a href="{% url 'blog_app:my_blog' %}" class="dropdown-item"> My Blog</a>
+                    <!---profile option--><hr>
+                    <a href="{% url 'login_app:User_profile' %}" class="dropdown-item"> Your Profile</a>
+                    <a href="{% url 'login_app:User_change' %}" class="dropdown-item"> Edit Profile</a>
+                    <a href="{% url 'login_app:User_logout' %}" class="dropdown-item"> Logout</a>
+                </div>
+            </div>
+            <li class="nav-item m-0 pl-3">
+                <a href="{% url 'login_app:User_profile' %}" class="nav-link"> 
+                    {% if user.user_profile %}
+                    <img src="/media/{{user.user_profile.profile_pic}}" alt="" width="30px " class="rounded-circle"  height="30px">
+                    
+                    {% else %}
+                    <img src="/media/defult.png" alt="" class="rounded-circle" width="30px " height="30px" >
+                    
+                    {% endif %}
+                </a>
+            </li> 
+            {% else %}
+            <li class="nav-item ">
+                <a href="{% url 'login_app:SignUp' %}" class="nav-link">Create account</a>
+            </li>
+            <li class="nav-item ">
+                <a href="{% url 'login_app:User_login' %}" class="nav-link"> Login</a>
+            </li>
+            {% endif %}
+            
+        </ul>
+        
+
+    </nav>
+    <div class="container-fluid pt-3">
+        {% block content_fluid_block %}
+
+        {% endblock content_fluid_block %}
+
+    </div>
+    <div class="container pt-2">
+        {% block content_block %}
+
+        {% endblock content_block %}
+
+    </div>
+
+    
+    <footer>
+        <div class="footer-section " style="text-align: center; padding: 30px; background: #44010b; color: #ffffff;">
+            <h5>All things are copy right by @nayamat09</h5>
+        </div>
+    </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <script src="{% static 'js/all.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/jQuery.js' %}"></script>
+    <script src="{% static 'js/propper.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+     -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    
+    
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+  <!-- <script src="https://kit.fontawesome.com/e81d17d39f.js" crossorigin="anonymous"></script> -->
+</body>
+</html>

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% load crispy_forms_tags %}
+{% block title_block %}
+    {{title}}
+{% endblock title_block %}
+
+
+
+{% block content_block %}
+
+<h5>Delete You Blog!! </h5> 
+<form method="POST" enctype="multipart/form-data" >
+    {% csrf_token %}
+    <h4>Are You sure ?</h4>
+    <button type="submit" name="button" class="btn btn-danger">Delete </button>
+
+</form>
+        
+{% endblock content_block %}
+

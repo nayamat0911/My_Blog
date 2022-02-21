@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title_block %}
+    Blog_Create
+{% endblock title_block %}
+
+
+
+{% block content_block %}
+        <h1 class="text-center ">Creae Blog page</h1> 
+        <div style="border: 2px dashed rgb(12, 3, 3);"></div>
+        <br> <br>
+
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form|crispy}}
+            <button type="submit" class="btn btn-success px-4 py-3 m-3 p-2">Post</button>
+        </form>
+
+{% endblock content_block %}

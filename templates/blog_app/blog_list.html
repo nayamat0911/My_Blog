@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% load crispy_forms_tags %}
+{% block title_block %}
+    {{title}}
+{% endblock title_block %}
+
+
+
+{% block content_block %}
+        <!-- <h1 class="text-center">Blog List page</h1> -->
+        {% for blog in blogs %}
+        <h3>{{blog.blog_title}}</h3>
+        <h6><i>{{blog.publish_date}}</i></h6>
+        <div class="row">
+            <div class="col-sm-5">
+                <img src="/media/{{ blog.blog_image }}" alt="{{blog.blog_title}}" title="{{blog.blog_title}}" width="100%">
+            </div>
+            <div class="col-sm-7">
+                {% if request.user.is_authenticated %}
+                <p>{{blog.blog_content|range_filter|linebreaks}}<b> <a href="{% url 'blog_app:blog_details' blog.slug %}" style="color: #ff8c00;" >Read More</a></b></p>
+                {% else %}
+                <p>{{blog.blog_content|range_filter|linebreaks}}<b> <a href="{% url 'blog_app:Read_page' %}" style="color: #ff8c00;" >Read More</a></b></p>
+                {% endif %}
+
+                <h6>Posted by: <a href="#">@{{blog.author}}</a></h6>
+                <h6>{{blog.liked_blog.count}} likes | {{blog.blog_comment.count}} comments</h6>
+
+            </div>
+        </div>
+        <hr>
+        
+
+        {% endfor %}
+        
+        
+{% endblock content_block %}
+
+<!-- <a href="{% url 'blog_app:blog_details' slug=blog.slug %}">Read more</a>  -->
