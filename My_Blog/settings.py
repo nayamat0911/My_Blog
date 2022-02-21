@@ -16,6 +16,9 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 import os
+import django_heroku
+from decouple import config
+
 TEMPLATES_DIR=os.path.join(BASE_DIR,'templates')
 STATIC_DIR=os.path.join(BASE_DIR,'static')
 
@@ -58,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'My_Blog.urls'
@@ -129,6 +133,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS=[STATIC_DIR,]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_ROOT=MEDIA_DIR
 MEDIA_URL='/media/'
@@ -138,3 +143,6 @@ LOGIN_URL = '/account/User_login/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+django_heroku.settings(locals())

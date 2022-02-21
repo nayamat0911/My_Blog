@@ -1,0 +1,1 @@
+web:geuicorn My_Blog.urls.wsgi
